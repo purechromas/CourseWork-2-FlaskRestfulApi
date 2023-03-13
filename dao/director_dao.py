@@ -1,5 +1,5 @@
 from dao.models.director import Director
-from database import db
+
 
 class DirectorDAO:
     def __init__(self, session):
@@ -10,7 +10,7 @@ class DirectorDAO:
 
     def get_all(self, page):
         if page:
-            return db.paginate(self.session.query(Director), per_page=12)
+            return self.session.query(Director).paginate(per_page=12)
         else:
             return self.session.query(Director).all()
 

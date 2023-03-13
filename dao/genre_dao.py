@@ -1,5 +1,4 @@
 from dao.models.genre import Genre
-from database import db
 
 
 class GenreDAO:
@@ -11,7 +10,7 @@ class GenreDAO:
 
     def get_all(self, page=None):
         if page:
-            return db.paginate(self.session.query(Genre), per_page=12)
+            return self.session.query(Genre).paginate(per_page=12)
         else:
             return self.session.query(Genre).all()
 

@@ -1,5 +1,4 @@
 from dao.models.movie import Movie
-from database import db
 
 
 class MovieDAO:
@@ -11,9 +10,9 @@ class MovieDAO:
 
     def get_all(self, page=None, status=None):
         if status:
-            return db.paginate(self.session.query(Movie).order_by(Movie.year.desc()), per_page=12)
+            return self.session.query(Movie).order_by(Movie.year.desc()).paginate(per_page=12)
         elif page is not None:
-            return db.paginate(self.session.query(Movie), per_page=12)
+            return self.session.query(Movie).paginate(per_page=12)
         else:
             return self.session.query(Movie).all()
 
